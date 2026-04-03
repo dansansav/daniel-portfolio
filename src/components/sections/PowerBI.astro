@@ -1,0 +1,20 @@
+---
+import SectionTitle from "../ui/SectionTitle.astro";
+import DashboardCard from "../ui/DashboardCard.astro";
+import { dashboards } from "../../lib/dashboards";
+---
+
+<section id="powerbi" class="bg-bg py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle
+      titleEs="Power BI"
+      subtitleEs="Dashboards multi-página con DAX, KPIs ejecutivos y visualizaciones interactivas."
+      subtitleEn="Multi-page dashboards with DAX, executive KPIs and interactive visualizations."
+    />
+    <div class="flex flex-col gap-20">
+      {dashboards.map((dashboard, i) => (
+        <DashboardCard dashboard={dashboard} reversed={i % 2 !== 0} />
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,132 @@
+---
+import SectionTitle from "../ui/SectionTitle.astro";
+
+const types = [
+  {
+    icon: "📊",
+    titleEs: "Estratégico",
+    titleEn: "Strategic",
+    color: "#06D6A0",
+    pointsEs: [
+      "Visión global del negocio",
+      "KPIs clave para los directivos",
+      "Seguimiento a metas a largo plazo",
+    ],
+    pointsEn: [
+      "Global business overview",
+      "Key KPIs for executives",
+      "Long-term goal tracking",
+    ],
+  },
+  {
+    icon: "🔍",
+    titleEs: "Analítico",
+    titleEn: "Analytical",
+    color: "#F7B731",
+    pointsEs: [
+      "Permite analizar tendencias y patrones",
+      "Soporta decisiones a mediano plazo",
+      "Orientado a gerentes y analistas",
+    ],
+    pointsEn: [
+      "Analyze trends and patterns",
+      "Supports mid-term decisions",
+      "Designed for managers and analysts",
+    ],
+  },
+  {
+    icon: "⚡",
+    titleEs: "Operativo",
+    titleEn: "Operational",
+    color: "#60A5FA",
+    pointsEs: [
+      "Monitorea procesos en tiempo real",
+      "Foco en eficiencia y métricas diarias",
+      "Soporta respuesta rápida",
+    ],
+    pointsEn: [
+      "Monitors processes in real time",
+      "Focus on efficiency and daily metrics",
+      "Supports rapid response",
+    ],
+  },
+  {
+    icon: "📢",
+    titleEs: "Informativo",
+    titleEn: "Informative",
+    color: "#A78BFA",
+    pointsEs: [
+      "Comunica hallazgos a equipos y público general",
+      "Simple, visual y fácil de entender",
+      "Ideal para presentaciones y reportes",
+    ],
+    pointsEn: [
+      "Communicates findings to teams and general audiences",
+      "Simple, visual, and easy to understand",
+      "Ideal for presentations and reports",
+    ],
+  },
+];
+---
+
+<section id="tipos-dashboard" class="py-20 md:py-28 bg-surface/40">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <SectionTitle
+      titleEs="Tipos de Dashboard en Power BI"
+      titleEn="Types of Power BI Dashboards"
+      subtitleEs="Cada tipo depende del modelo de negocio y las necesidades estratégicas del momento."
+      subtitleEn="Each type depends on the business model and the strategic needs of the moment."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+      {types.map((t) => (
+        <div
+          class="animate-on-scroll group relative bg-bg border border-border rounded-2xl p-6 flex flex-col gap-4 hover:border-[var(--card-color)] transition-colors duration-300"
+          style={`--card-color: ${t.color}`}
+        >
+          <!-- Top accent bar -->
+          <div
+            class="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={`background: ${t.color}`}
+          />
+
+          <!-- Icon + Title -->
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">{t.icon}</span>
+            <div>
+              <h3
+                class="lang-es font-display font-bold text-lg leading-tight"
+                style={`color: ${t.color}`}
+              >{t.titleEs}</h3>
+              <h3
+                class="lang-en hidden font-display font-bold text-lg leading-tight"
+                style={`color: ${t.color}`}
+              >{t.titleEn}</h3>
+            </div>
+          </div>
+
+          <!-- Points ES -->
+          <ul class="lang-es flex flex-col gap-2.5">
+            {t.pointsEs.map((p) => (
+              <li class="flex items-start gap-2 text-sm text-muted leading-snug">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={`background: ${t.color}`} />
+                {p}
+              </li>
+            ))}
+          </ul>
+
+          <!-- Points EN -->
+          <ul class="lang-en hidden flex flex-col gap-2.5">
+            {t.pointsEn.map((p) => (
+              <li class="flex items-start gap-2 text-sm text-muted leading-snug">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={`background: ${t.color}`} />
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

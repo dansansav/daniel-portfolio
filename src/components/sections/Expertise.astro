@@ -1,0 +1,76 @@
+---
+const items = [
+  {
+    icon: "📊",
+    labelEs: "Power BI & DAX",
+    labelEn: "Power BI & DAX",
+    descEs: "Diseño de dashboards multi-página con KPIs ejecutivos, análisis de SLA y métricas de rendimiento comercial que convierten datos operacionales en decisiones estratégicas.",
+    descEn: "Multi-page dashboard design with executive KPIs, SLA analysis and commercial performance metrics that turn operational data into strategic decisions.",
+  },
+  {
+    icon: "🐍",
+    labelEs: "Python & Estadística",
+    labelEn: "Python & Statistics",
+    descEs: "Análisis exploratorio, detección de outliers, correlaciones de Pearson y Spearman e intervalos de confianza para extraer patrones reales de grandes volúmenes de datos.",
+    descEn: "Exploratory analysis, outlier detection, Pearson and Spearman correlations and confidence intervals to extract real patterns from large volumes of data.",
+  },
+  {
+    icon: "🔗",
+    labelEs: "Integración de Sistemas",
+    labelEn: "Systems Integration",
+    descEs: "Articulación entre Salesforce, SAP Ariba y herramientas de BI para consolidar fuentes de datos dispersas y automatizar reportes ejecutivos con Power Query y Excel.",
+    descEn: "Integration between Salesforce, SAP Ariba and BI tools to consolidate scattered data sources and automate executive reports with Power Query and Excel.",
+  },
+  {
+    icon: "💡",
+    labelEs: "Storytelling con Datos",
+    labelEn: "Data Storytelling",
+    descEs: "Traducción de análisis complejos en narrativas visuales claras y accionables que alinean equipos multidisciplinarios y respaldan decisiones ejecutivas con evidencia.",
+    descEn: "Translation of complex analyses into clear, actionable visual narratives that align multidisciplinary teams and support executive decisions with evidence.",
+  },
+];
+---
+
+<section id="expertise" class="bg-surface py-24">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Title -->
+    <div class="flex flex-col gap-3 mb-12">
+      <div class="flex items-center gap-3">
+        <span class="block w-8 h-0.5 bg-accent shrink-0"></span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-copy">
+          <span class="lang-es">¿Qué hago?</span>
+          <span class="lang-en hidden">What I do</span>
+        </h2>
+      </div>
+      <p class="text-muted text-base md:text-lg max-w-xl leading-relaxed">
+        <span class="lang-es">Áreas en las que genero valor con datos.</span>
+        <span class="lang-en hidden">Areas where I generate value with data.</span>
+      </p>
+    </div>
+
+    <!-- Items -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {items.map((item, i) => (
+        <div
+          class={`animate-on-scroll delay-${i + 1} group flex gap-4 p-6 rounded-xl border border-border bg-bg hover:border-accent/40 transition-all duration-300`}
+        >
+          <!-- Icon -->
+          <span class="text-2xl mt-0.5 shrink-0">{item.icon}</span>
+
+          <!-- Content -->
+          <div class="flex flex-col gap-1.5">
+            <p class="font-display font-semibold text-base text-copy">
+              <span class="lang-es">{item.labelEs}</span>
+              <span class="lang-en hidden">{item.labelEn}</span>
+            </p>
+            <p class="text-sm text-muted leading-relaxed">
+              <span class="lang-es">{item.descEs}</span>
+              <span class="lang-en hidden">{item.descEn}</span>
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

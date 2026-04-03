@@ -1,0 +1,20 @@
+---
+interface Props {
+  label: string;
+  variant?: "accent" | "gold" | "muted";
+}
+
+const { label, variant = "muted" } = Astro.props;
+
+const styles = {
+  accent: "border-accent/40 text-accent bg-accent/5",
+  gold:   "border-gold/40 text-gold bg-gold/5",
+  muted:  "border-border text-muted bg-surface-raised",
+};
+---
+
+<span
+  class={`inline-flex items-center border rounded px-2.5 py-1 text-xs font-medium tracking-wide ${styles[variant]}`}
+>
+  {label}
+</span>

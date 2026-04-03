@@ -1,0 +1,19 @@
+---
+interface Props {
+  value: string;
+  labelEs: string;
+  labelEn: string;
+  delay?: number;
+}
+
+const { value, labelEs, labelEn, delay = 0 } = Astro.props;
+const delayClass = delay > 0 ? `delay-${delay}` : "";
+---
+
+<div class={`animate-on-scroll ${delayClass} flex flex-col items-center text-center p-6 rounded-xl border border-border bg-surface-raised`}>
+  <span class="font-display font-bold text-5xl text-accent leading-none mb-2">{value}</span>
+  <span class="text-sm text-muted uppercase tracking-widest font-medium">
+    <span class="lang-es">{labelEs}</span>
+    <span class="lang-en hidden">{labelEn}</span>
+  </span>
+</div>

@@ -1,0 +1,52 @@
+---
+import StatCard from "../ui/StatCard.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import { siteConfig } from "../../lib/config";
+---
+
+<section id="about" class="bg-surface py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle
+      titleEs="Sobre mí"
+      titleEn="About me"
+      subtitleEs="Analista de datos con enfoque en convertir números en narrativas de negocio."
+      subtitleEn="Data analyst focused on turning numbers into business narratives."
+    />
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Bio -->
+      <div class="animate-on-scroll flex flex-col gap-5">
+        <!-- Bio paragraph 1 -->
+        <p class="lang-es text-copy/80 leading-relaxed text-base">
+          Soy Data Analyst con más de <span class="text-accent font-semibold">5 años de experiencia</span> en analítica comercial y business intelligence. Me especializo en transformar grandes volúmenes de datos en dashboards accionables e insights estratégicos que impulsan decisiones de negocio.
+        </p>
+        <p class="lang-en hidden text-copy/80 leading-relaxed text-base">
+          I am a Data Analyst with over <span class="text-accent font-semibold">5 years of experience</span> in commercial analytics and business intelligence. I specialize in transforming large volumes of data into actionable dashboards and strategic insights that drive business decisions.
+        </p>
+
+        <!-- Bio paragraph 2 -->
+        <p class="lang-es text-copy/80 leading-relaxed text-base">
+          Mi trabajo combina la precisión técnica de <span class="text-accent font-semibold">Power BI y Python</span> con una comunicación ejecutiva clara. He liderado proyectos de análisis en sectores de turismo, finanzas y servicios, trabajando con stakeholders de todos los niveles.
+        </p>
+        <p class="lang-en hidden text-copy/80 leading-relaxed text-base">
+          My work combines the technical precision of <span class="text-accent font-semibold">Power BI and Python</span> with clear executive communication. I have led analytics projects in the tourism, finance, and services sectors, working with stakeholders at all levels.
+        </p>
+
+        <!-- Bio paragraph 3 -->
+        <p class="lang-es text-copy/80 leading-relaxed text-base">
+          Creo que el dato sin contexto no vale nada — el valor real está en la historia que cuenta y en la decisión que habilita.
+        </p>
+        <p class="lang-en hidden text-copy/80 leading-relaxed text-base">
+          I believe that data without context is worthless — the real value lies in the story it tells and the decision it enables.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-4">
+        <StatCard value={`${siteConfig.experience}`} labelEs="Años de experiencia"   labelEn="Years of experience"  delay={1} />
+        <StatCard value={`${siteConfig.projects}`}   labelEs="Proyectos completados" labelEn="Completed projects"   delay={2} />
+        <StatCard value={`${siteConfig.tools}`}      labelEs="Herramientas"          labelEn="Tools"                delay={3} />
+      </div>
+    </div>
+  </div>
+</section>

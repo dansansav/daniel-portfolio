@@ -1,0 +1,28 @@
+---
+interface Props {
+  titleEs: string;
+  titleEn?: string;
+  subtitleEs?: string;
+  subtitleEn?: string;
+  align?: "left" | "center";
+}
+
+const { titleEs, titleEn, subtitleEs, subtitleEn, align = "left" } = Astro.props;
+const alignClass = align === "center" ? "text-center items-center" : "text-left items-start";
+---
+
+<div class={`flex flex-col gap-3 mb-12 ${alignClass}`}>
+  <div class="flex items-center gap-3">
+    <span class="block w-8 h-0.5 bg-accent shrink-0"></span>
+    <h2 class="font-display font-bold text-3xl md:text-4xl text-copy">
+      <span class="lang-es">{titleEs}</span>
+      {titleEn && <span class="lang-en hidden">{titleEn}</span>}
+    </h2>
+  </div>
+  {(subtitleEs || subtitleEn) && (
+    <p class="text-muted text-base md:text-lg max-w-xl leading-relaxed">
+      {subtitleEs && <span class="lang-es">{subtitleEs}</span>}
+      {subtitleEn && <span class="lang-en hidden">{subtitleEn}</span>}
+    </p>
+  )}
+</div>

@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: #0F1117;
+  --color-surface: #1A1E2E;
+  --color-surface-raised: #242838;
+  --color-accent: #06D6A0;
+  --color-gold: #F7B731;
+  --color-copy: #F0F4F8;
+  --color-muted: #8892A4;
+  --color-border: #2D3748;
+  --color-error: #FF5470;
+}
+
+/* ─── Base ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  background-color: #0F1117;
+  color: #F0F4F8;
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Data grid decoration ──────────────────────────────── */
+.data-grid {
+  background-image:
+    linear-gradient(rgba(6, 214, 160, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 214, 160, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Scroll animations ─────────────────────────────────── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* ─── Gallery ───────────────────────────────────────────── */
+.gallery-viewport {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #2D3748;
+}
+.gallery-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gallery-track img {
+  min-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+.gallery-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #2D3748;
+  transition: background-color 0.2s, width 0.2s;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+.gallery-dot.active {
+  background-color: #06D6A0;
+  width: 20px;
+}
+
+/* ─── Lightbox ──────────────────────────────────────────── */
+dialog {
+  background: #0F1117;
+  border: 1px solid #2D3748;
+  border-radius: 12px;
+  padding: 0;
+  max-width: 92vw;
+  max-height: 92vh;
+  overflow: hidden;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+}
+dialog img {
+  display: block;
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+/* ─── IT Tool cards ─────────────────────────────────────── */
+.tool-card {
+  border: 1px solid #2D3748;
+  border-radius: 10px;
+  background: #1A1E2E;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.tool-card:hover {
+  background: #242838;
+}
+
+/* ─── Glow effect on teal elements ─────────────────────── */
+.teal-glow {
+  box-shadow: 0 0 20px rgba(6, 214, 160, 0.15);
+}

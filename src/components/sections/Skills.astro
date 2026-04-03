@@ -1,0 +1,28 @@
+---
+import SectionTitle from "../ui/SectionTitle.astro";
+import Badge from "../ui/Badge.astro";
+import { skillCategories } from "../../lib/skills";
+---
+
+<section id="skills" class="bg-bg py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle
+      titleEs="Skills"
+      subtitleEs="Competencias técnicas y habilidades que aplico en cada proyecto."
+      subtitleEn="Technical competencies and skills I apply in every project."
+    />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {skillCategories.map((cat, i) => (
+        <div class={`animate-on-scroll delay-${i + 1} p-6 rounded-xl border border-border bg-surface hover:border-accent/30 transition-colors duration-300`}>
+          <h3 class="font-display font-semibold text-sm text-copy mb-4 uppercase tracking-widest">
+            <span class="lang-es">{cat.labelEs}</span>
+            <span class="lang-en hidden">{cat.labelEn}</span>
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {cat.items.map((item) => <Badge label={item} variant={cat.variant} />)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

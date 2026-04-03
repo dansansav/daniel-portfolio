@@ -1,0 +1,79 @@
+---
+import SectionTitle from "../ui/SectionTitle.astro";
+import { certificates } from "../../lib/certificates";
+
+const categoryColors: Record<string, string> = {
+  BI:         "#06D6A0",
+  Analytics:  "#F7B731",
+  Python:     "#F7B731",
+  Management: "#60A5FA",
+  Other:      "#8892A4",
+};
+---
+
+<section id="certificates" class="bg-bg py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle
+      titleEs="Certificados"
+      titleEn="Certificates"
+      subtitleEs="Formación y certificaciones que respaldan mi práctica profesional."
+      subtitleEn="Training and certifications that support my professional practice."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {certificates.map((cert, i) => {
+        const color = categoryColors[cert.category] ?? "#8892A4";
+        return (
+          <div
+            class={`animate-on-scroll delay-${(i % 4) + 1} relative flex flex-col gap-4 p-6 rounded-xl border border-border bg-surface hover:border-accent/40 transition-all duration-300 group`}
+          >
+            {/* Badge image if available */}
+            {cert.badgeImage && (
+              <img
+                src={cert.badgeImage}
+                alt={cert.name}
+                class="w-16 h-16 object-contain rounded-lg"
+                loading="lazy"
+              />
+            )}
+
+            {/* Category tag */}
+            <span
+              class="absolute top-4 right-4 text-xs font-semibold px-2 py-0.5 rounded"
+              style={`color: ${color}; background: ${color}18; border: 1px solid ${color}33;`}
+            >
+              {cert.category}
+            </span>
+
+            {/* Content */}
+            <div class="flex flex-col gap-1.5 mt-1">
+              <h3 class="font-display font-semibold text-base text-copy leading-snug pr-12">
+                {cert.name}
+              </h3>
+              <p class="text-sm text-muted">{cert.institution}</p>
+              <p class="text-xs text-muted/60 font-mono">{cert.year}</p>
+            </div>
+
+            {/* Credential link */}
+            {cert.credentialUrl && (
+              <a
+                href={cert.credentialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs text-accent hover:text-accent/80 transition-colors font-medium mt-auto"
+              >
+                <span class="lang-es">Ver credencial</span>
+                <span class="lang-en hidden">View credential</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

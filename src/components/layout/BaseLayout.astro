@@ -1,0 +1,98 @@
+---
+import { siteConfig } from "../../lib/config";
+import "../../styles/globals.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${siteConfig.name} — ${siteConfig.title} | ${siteConfig.subtitle}`,
+  description = `Data Analyst con ${siteConfig.experience} años de experiencia. Especialista en Power BI, DAX y Python. Transformo datos complejos en decisiones estratégicas.`,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content={siteConfig.url} />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <link rel="canonical" href={siteConfig.url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-bg text-copy">
+    <slot />
+  </body>
+</html>
+
+<script>
+  // ─── i18n ────────────────────────────────────────────────
+  function setLang(lang: string) {
+    // Show/hide language-specific elements
+    document.querySelectorAll<HTMLElement>(".lang-es").forEach((el) => {
+      el.classList.toggle("hidden", lang !== "es");
+    });
+    document.querySelectorAll<HTMLElement>(".lang-en").forEach((el) => {
+      el.classList.toggle("hidden", lang !== "en");
+    });
+
+    // Update <html lang>
+    document.documentElement.lang = lang;
+
+    // Persist preference
+    localStorage.setItem("lang", lang);
+  }
+
+  function toggleLang() {
+    const current = localStorage.getItem("lang") ?? "es";
+    setLang(current === "es" ? "en" : "es");
+  }
+
+  // Expose globally for inline onclick handlers
+  (window as any).setLang = setLang;
+  (window as any).toggleLang = toggleLang;
+
+  // Apply saved language on load (default: es)
+  const saved = localStorage.getItem("lang") ?? "es";
+  if (saved !== "es") setLang(saved);
+
+  // ─── Scroll animations ───────────────────────────────────
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+    observer.observe(el);
+  });
+</script>

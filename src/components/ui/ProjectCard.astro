@@ -1,0 +1,133 @@
+---
+import Badge from "./Badge.astro";
+import type { PythonProject } from "../../lib/python-projects";
+
+interface Props {
+  project: PythonProject;
+}
+
+const { project } = Astro.props;
+const { id, title, longDescription, images, techniques, libraries } = project;
+const galleryId  = `py-gallery-${id}`;
+const trackId    = `py-track-${id}`;
+const lightboxId = `py-lightbox-${id}`;
+const imageCount = images.length;
+---
+
+<div class="animate-on-scroll grid grid-cols-1 md:grid-cols-2 gap-8 items-start p-7 rounded-2xl border border-border bg-surface hover:border-gold/30 transition-colors duration-300">
+
+  <!-- Gallery -->
+  <div class="flex flex-col gap-3">
+    <div id={galleryId} class="relative rounded-xl overflow-hidden border border-border bg-surface">
+      <div class="gallery-viewport">
+        <div class="gallery-track" id={trackId}>
+          {images.map((src, i) => (
+            <button
+              class="gallery-slide min-w-full cursor-zoom-in border-0 bg-transparent p-0"
+              data-lightbox={lightboxId}
+              data-src={src}
+              aria-label={`Ver ${title} — imagen ${i + 1}`}
+            >
+              <img
+                src={src}
+                alt={`${title} — figura ${i + 1}`}
+                loading={i === 0 ? "eager" : "lazy"}
+                class="w-full h-auto object-cover block"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+              />
+              <div class="hidden w-full aspect-video items-center justify-center flex-col gap-3 text-muted p-6">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span class="text-xs text-center">Imagen no disponible</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {imageCount > 1 && (
+        <>
+          <button class="gallery-prev absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-bg/80 border border-border hover:border-gold hover:text-gold text-muted flex items-center justify-center transition-colors duration-200 backdrop-blur-sm" aria-label="Anterior">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="gallery-next absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-bg/80 border border-border hover:border-gold hover:text-gold text-muted flex items-center justify-center transition-colors duration-200 backdrop-blur-sm" aria-label="Siguiente">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </>
+      )}
+    </div>
+
+    {imageCount > 1 && (
+      <div class="flex items-center justify-center gap-1.5" id={`py-dots-${id}`}>
+        {images.map((_, i) => (
+          <button class={`gallery-dot ${i === 0 ? "active" : ""}`} data-index={i} aria-label={`Imagen ${i + 1}`} />
+        ))}
+      </div>
+    )}
+  </div>
+
+  <!-- Content -->
+  <div class="flex flex-col gap-4">
+    <h3 class="font-display font-bold text-lg md:text-xl text-copy leading-snug">{title}</h3>
+
+    <p class="lang-es text-muted text-sm leading-relaxed">{longDescription.es}</p>
+    <p class="lang-en hidden text-muted text-sm leading-relaxed">{longDescription.en}</p>
+
+    <!-- Techniques -->
+    <div>
+      <p class="text-xs text-muted uppercase tracking-widest mb-2 font-medium">
+        <span class="lang-es">Técnicas</span>
+        <span class="lang-en hidden">Techniques</span>
+      </p>
+      <ul class="flex flex-col gap-1.5">
+        {techniques.map((t) => (
+          <li class="flex items-center gap-2 text-sm text-copy/80">
+            <span class="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />{t}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="flex flex-wrap gap-2 pt-1">
+      {libraries.map((lib) => <Badge label={lib} variant="gold" />)}
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<dialog id={lightboxId}>
+  <button class="lightbox-close absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-surface border border-border text-muted hover:text-copy flex items-center justify-center transition-colors" aria-label="Cerrar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <img id={`py-lightbox-img-${id}`} src="" alt="" class="block max-w-[90vw] max-h-[85vh] object-contain" />
+</dialog>
+
+<script define:vars={{ galleryId, trackId, lightboxId, id, imageCount }}>
+  const track       = document.getElementById(trackId);
+  const dots        = document.querySelectorAll(`#py-dots-${id} .gallery-dot`);
+  const lightbox    = document.getElementById(lightboxId);
+  const lightboxImg = document.getElementById(`py-lightbox-img-${id}`);
+  let current = 0;
+
+  function goTo(n) {
+    current = ((n % imageCount) + imageCount) % imageCount;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle("active", i === current));
+  }
+
+  const container = document.getElementById(galleryId);
+  container.querySelector(".gallery-prev")?.addEventListener("click", () => goTo(current - 1));
+  container.querySelector(".gallery-next")?.addEventListener("click", () => goTo(current + 1));
+  dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+
+  document.querySelectorAll(`[data-lightbox="${lightboxId}"]`).forEach((btn) => {
+    btn.addEventListener("click", () => {
+      lightboxImg.src = btn.dataset.src;
+      lightbox.showModal();
+    });
+  });
+
+  lightbox.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) lightbox.close(); });
+</script>

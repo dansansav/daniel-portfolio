@@ -1,0 +1,52 @@
+---
+import { siteConfig } from "../../lib/config";
+---
+
+<section id="hero" class="data-grid relative min-h-screen flex items-center pt-16">
+  <div class="pointer-events-none absolute inset-0" style="background: radial-gradient(ellipse 60% 50% at 20% 50%, rgba(6,214,160,0.07) 0%, transparent 70%);"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 py-24">
+    <!-- Name -->
+    <h1 class="animate-on-scroll delay-1 font-display font-bold leading-none text-copy mb-4" style="font-size: clamp(2.75rem, 8vw, 5rem);">
+      {siteConfig.name.split(" ")[0]}{" "}
+      <span class="text-accent">{siteConfig.name.split(" ")[1]}</span>
+    </h1>
+
+    <!-- Title -->
+    <p class="animate-on-scroll delay-2 font-display font-semibold text-muted mb-3" style="font-size: clamp(1.1rem, 2.5vw, 1.5rem);">
+      {siteConfig.title}
+      <span class="text-border mx-2">·</span>
+      {siteConfig.subtitle}
+    </p>
+
+    <!-- Tagline -->
+    <p class="animate-on-scroll delay-3 text-copy/60 max-w-lg leading-relaxed mb-10" style="font-size: clamp(1rem, 1.8vw, 1.125rem);">
+      <span class="lang-es">Convierto datos complejos en decisiones estratégicas</span>
+      <span class="lang-en hidden">I turn complex data into strategic decisions</span>
+    </p>
+
+    <!-- CTAs -->
+    <div class="animate-on-scroll delay-4 flex flex-wrap gap-4">
+      <a href="#powerbi" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent text-bg font-semibold text-sm hover:bg-accent/90 transition-all duration-200 teal-glow">
+        <span class="lang-es">Ver mi trabajo</span>
+        <span class="lang-en hidden">See my work</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+      <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-muted hover:border-accent hover:text-accent font-semibold text-sm transition-all duration-200">
+        LinkedIn
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="animate-on-scroll delay-5 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted">
+      <span class="text-xs tracking-widest uppercase">Scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-muted to-transparent"></div>
+    </div>
+  </div>
+</section>

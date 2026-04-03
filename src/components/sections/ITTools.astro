@@ -1,0 +1,47 @@
+---
+import SectionTitle from "../ui/SectionTitle.astro";
+import { itTools, categoryColors } from "../../lib/skills";
+---
+
+<section id="tools" class="bg-surface py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle
+      titleEs="IT Tools"
+      subtitleEs="Herramientas que uso en mi trabajo diario — desde análisis de datos hasta gestión de proyectos e IA."
+      subtitleEn="Tools I use in my daily work — from data analysis to project management and AI."
+    />
+
+    <div class="animate-on-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {itTools.map((tool, i) => {
+        const color = categoryColors[tool.category];
+        return (
+          <div
+            class={`tool-card animate-on-scroll delay-${(i % 5) + 1}`}
+            style={`--tool-color: ${color};`}
+          >
+            <span class="font-medium text-sm text-copy">{tool.name}</span>
+            <span
+              class="shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold"
+              style={`color: ${color}; background: ${color}18; border: 1px solid ${color}33;`}
+            >
+              {tool.category}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="animate-on-scroll mt-10 flex flex-wrap gap-4 justify-center">
+      {Object.entries(categoryColors).map(([cat, color]) => (
+        <span class="flex items-center gap-1.5 text-xs text-muted">
+          <span class="w-2.5 h-2.5 rounded-full shrink-0" style={`background: ${color};`} />
+          {cat}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tool-card:hover { border-color: var(--tool-color, #2D3748); }
+</style>
