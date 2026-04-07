@@ -7,7 +7,7 @@ export const siteConfig = {
   linkedin: "https://www.linkedin.com/in/danielsanta/",
   github: "https://github.com/dansansav",
   experience: "5+",
-  projects: "30+",
+  projects: "20+",
   tools: "10+",
   url: "https://daniel-santamaria.vercel.app",
 } as const;
